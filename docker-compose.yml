@@ -3,7 +3,9 @@ services:
   master:
     build: .
     container_name: master
+    ports:
+      - "8080:8080"
     volumes:
       - ./:/app
-    command: tail -f /dev/null
+    command: /app/backend/vendor/bin/yii serve 0.0.0.0:8080 -t /app/backend/web
     
