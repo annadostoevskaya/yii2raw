@@ -1,11 +1,22 @@
 version: '3'
 services:
-  master:
-    build: .
-    container_name: master
+  backend:
+    build: ./backend
     ports:
       - "8080:8080"
     volumes:
-      - ./:/app
-    command: /app/backend/vendor/bin/yii serve 0.0.0.0:8080 -t /app/backend/web
-    
+      - ./backend:/app
+  
+  db:
+    image: mysql:8.0
+    volumes: 
+      - ./data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: default
+      MYSQL_USER: default
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+   
