@@ -1,4 +1,6 @@
 # yii2raw
 
 References:
-- https://bobcares.com/blog/connection-reset-by-peer-docker-error/
+- CURLE_RECV_ERROR (56): https://bobcares.com/blog/connection-reset-by-peer-docker-error/
+- Designing of Databases: https://publications.hse.ru/mirror/pubs/share/direct/259052819
+- React: https://youtu.be/XAGCULPO_DE

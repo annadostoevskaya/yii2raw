@@ -2,7 +2,9 @@
 namespace app\controllers;
 
 use Yii;
-use yii\web\Controller;
+use yii\base\ErrorException;
+use yii\base\Exception;
+use yii\web\Controller; 
 
 class ApiController extends Controller
 {
@@ -10,11 +12,11 @@ class ApiController extends Controller
     {
         $e = Yii::$app->errorHandler->exception;
         return $this->asJson([
-            "success" => false,
-            "error" => [
-                "code" => $e->statusCode,
-                "msg"  => $e->getMessage()
-            ]
+            "name" => ($e instanceof Exception || $e instanceof ErrorException) ? $e->getName() : 'Exception',
+            "message" => $e->getMessage(),
+            "code" => $e->getCode(),
+            "status" => $e->statusCode,
+            "type" => get_class($e),
         ]);
     }
 }
