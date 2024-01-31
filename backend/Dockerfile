@@ -6,9 +6,11 @@ COPY . /app
 
 # && pear config-set http_proxy $http_proxy \
 
-RUN apk add --no-cache --update linux-headers $PHPIZE_DEPS \
-    && pecl install xdebug && pecl clear cache \
-    && docker-php-ext-enable xdebug 
+RUN apk add --no-cache --update linux-headers \
+    && apk add --no-cache $PHPIZE_DEPS
+
+RUN pecl install xdebug && pecl clear-cache \
+    && docker-php-ext-enable xdebug
 
 RUN apk add --no-cache libmcrypt-dev \
     && pecl install mcrypt-1.0.4 && pecl clear-cache\
