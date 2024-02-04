@@ -5,19 +5,19 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./backend:/app
+      - ./backend:/app:cached 
   
   frontend:
     # build: ./frontend
     image: alpine:3.16
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app:cached 
     command: tail -f /dev/null
 
   db:
     image: mysql:8.0
     volumes: 
-      - ./data:/var/lib/mysql
+      - ./data:/var/lib/mysql:cached 
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
