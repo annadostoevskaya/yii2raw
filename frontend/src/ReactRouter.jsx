@@ -5,6 +5,7 @@
  * 
  * Description: 
  * - TODO(annad): Pass arguments by URL
+ * - TODO(annad): One Component - Multiple Routes
  */
 
 (((global, factory) => {
@@ -12,7 +13,9 @@
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (global = global || self, factory(global.ReactRouter = {}));
 })(this, ((exports) => { 'use strict';
-  
+
+  const { useRef, useState } = React;
+
   exports.Router = ({routes, _404}) => {
     let initialized = useRef(false);
     const [route, setRoute] = useState(window.location.hash);

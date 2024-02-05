@@ -10,8 +10,7 @@ services:
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend:/app:cached 
-    command: tail -f /dev/null
+      - ./frontend:/app:cached
 
   db:
     image: mysql:8.0
