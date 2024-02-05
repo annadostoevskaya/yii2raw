@@ -3,7 +3,8 @@
  * E-mail: iwantknow.aboutjt68h43@gmail.com
  * Create: 2024-02-05 00:18:08
  * 
- * Description: <empty>
+ * Description: 
+ * - TODO(annad): Pass arguments by URL
  */
 
 (((global, factory) => {

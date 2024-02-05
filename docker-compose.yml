@@ -8,8 +8,7 @@ services:
       - ./backend:/app:cached 
   
   frontend:
-    # build: ./frontend
-    image: alpine:3.16
+    build: ./frontend
     volumes:
       - ./frontend:/app:cached 
     command: tail -f /dev/null

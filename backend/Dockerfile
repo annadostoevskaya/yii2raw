@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-# && pear config-set http_proxy $http_proxy \
+RUN if [[ -n ${http_proxy} ]]; then pear config-set http_proxy "$http_proxy"; fi
 
 RUN apk add --no-cache --update linux-headers \
     && apk add --no-cache $PHPIZE_DEPS
