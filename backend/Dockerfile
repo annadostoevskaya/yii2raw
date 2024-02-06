@@ -16,7 +16,7 @@ RUN apk add --no-cache libmcrypt-dev \
     && pecl install mcrypt-1.0.4 && pecl clear-cache\
     && docker-php-ext-enable mcrypt
 
-RUN cp utils/composer.phar /usr/local/bin/composer && composer install
+RUN chmod+x utils/composer.phar && cp utils/composer.phar /usr/local/bin/composer && composer install
 
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
