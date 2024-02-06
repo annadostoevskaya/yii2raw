@@ -14,28 +14,24 @@
   (global = global || self, factory(global.ReactRouter = {}));
 })(this, ((exports) => { 'use strict';
 
-  const { useRef, useState } = React;
+  const { useEffect, useState } = React;
 
   exports.Router = ({routes, _404}) => {
-    let initialized = useRef(false);
     const [route, setRoute] = useState(window.location.hash);
-    
-    const handleRoute = ((e) => {
-      setRoute(window.location.hash);
-    });
-  
-    if (initialized.current === false)
-    {
+
+    const handleRoute = () => setRoute(window.location.hash);
+
+    useEffect(() => {
       window.addEventListener("hashchange", handleRoute);
-      initialized.current = true;
-    }
-  
+      return () => window.removeEventListener("hashchange", handleRoute);
+    }, []);
+
     let content = _404 ?? '404: Not Found';
-  
+
     routes.map(r => {
       if (r.path == route) content = r.content();
     });
-  
+
     return content;
   }
 })));
