@@ -39,7 +39,12 @@ function About()
 
 function _404()
 {
-  return <p>Sorry... Nothing was found!</p>
+  return <p>Sorry... Nothing was found!</p>;
+}
+
+function Competition({id})
+{
+  return <p>Competition #{id}</p>
 }
 
 function Root()
@@ -61,6 +66,12 @@ function Root()
       title: 'About',
       path: '#/about',
       content: () => { return <About /> },
+    },
+
+    {
+      title: 'Competition',
+      path: '#/competition',
+      content: (urlSearchParams) => { return <Competition id={ urlSearchParams.get('id') } /> }
     },
   ];
 

@@ -4,8 +4,7 @@
  * Create: 2024-02-05 00:18:08
  * 
  * Description: 
- * - TODO(annad): Pass arguments by URL
- * - TODO(annad): One Component - Multiple Routes
+ * - TODO(annad): One Component - Multiple Routes, aliases
  */
 
 (((global, factory) => {
@@ -15,6 +14,15 @@
 })(this, ((exports) => { 'use strict';
 
   const { useEffect, useState } = React;
+
+  const extractPath = (route) => {
+    return route.split('?').at(0);
+  }
+
+  const extractParams = () => {
+    let params = window.location.hash.split('?').pop();
+    return new URLSearchParams(params);
+  }
 
   exports.Router = ({routes, _404}) => {
     const [route, setRoute] = useState(window.location.hash);
@@ -29,7 +37,8 @@
     let content = _404 ?? '404: Not Found';
 
     routes.map(r => {
-      if (r.path == route) content = r.content();
+      if (r.path == extractPath(route)) 
+        content = r.content(extractParams(route));
     });
 
     return content;
