@@ -4,7 +4,9 @@ namespace app\controllers;
 use Yii;
 use yii\base\ErrorException;
 use yii\base\Exception;
-use yii\web\Controller; 
+use yii\web\Controller;
+
+use app\tasks\DownloadTask;
 
 class ApiController extends Controller
 {
@@ -32,5 +34,17 @@ class ApiController extends Controller
         ]);
 
         return;
+    }
+
+    function actionTestQueue()
+    {
+        $taskId = Yii::$app->queue->push(new DownloadTask([
+            'url' => 'https://google.com/img',
+            'file' => '/tmp/image.jpg',
+        ]));
+        return $this->asJson([
+            'id' => $taskId,
+            'success' => true
+        ]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 $db = require __DIR__ . '/db.php';
+$redis = require __DIR__ . '/redis.php';
 
 return [
     'id' => 'template_project',
@@ -19,13 +20,12 @@ return [
             'class' => 'yii\redis\Cache',
             'redis' => 'redis',
         ]),
-        'redis' => [
-            'class' => 'yii\redis\Connection',
-            'hostname' => 'redis',
-            'port' => 6379,
-            'database' => 0,
-            'retries' => 1,
+        'queue' => [
+            'class' => 'yii\queue\redis\Queue',
+            'as log' => 'yii\queue\LogBehavior',
+            'redis' => 'redis',
         ],
+        'redis' => $redis,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
@@ -44,7 +44,7 @@ return [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-        ]
+        ],
     ],
 ];
 
