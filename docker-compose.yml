@@ -3,9 +3,11 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8080:8080"
+      - 8080:8080
+    networks:
+      - backend
     volumes:
-      - ./backend:/app:cached 
+      - ./backend:/app:cached
   
   frontend:
     build: ./frontend
@@ -13,15 +15,30 @@ services:
       - ./frontend:/app:cached
 
   db:
-    image: mysql:8.0
-    volumes: 
-      - ./data:/var/lib/mysql:cached 
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: default
       MYSQL_USER: default
       MYSQL_PASSWORD: secret
+    image: mysql:8.0
+    networks:
+      - backend
     ports:
-      - "3306:3306"
-   
+      - 3306:3306
+    restart: always
+    volumes:
+      - ./docker/mysql:/var/lib/mysql:cached
+
+  redis:
+    image: redis:7.2.4-alpine3.19
+    networks:
+      - backend
+    ports:
+      - 6379:6379
+    volumes:
+      - ./docker/redis:/data:cached
+    restart: always
+
+networks:
+  backend:
+    driver: bridge

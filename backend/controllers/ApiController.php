@@ -19,4 +19,18 @@ class ApiController extends Controller
             "type" => get_class($e),
         ]);
     }
+
+    function actionTestRedis()
+    {
+        \Yii::$app->cache->multiSet([
+            'posts{user1}' => 123,
+            'settings{user1}' => [
+                'showNickname' => false,
+                'sortBy' => 'created_at',
+            ],
+            'unreadMessages{user1}' => 5,
+        ]);
+
+        return;
+    }
 }
