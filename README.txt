@@ -6,3 +6,6 @@ References:
 - React: https://youtu.be/XAGCULPO_DE
 - CSRF: https://habr.com/ru/companies/banki/articles/759058/
 - Webpack: https://adityash1.hashnode.dev/webpack-under-the-hood
+- PHP + Docker: https://habr.com/ru/articles/460173/
+- Yii2 + Docker: https://youtu.be/gVGfegSLg14
+
