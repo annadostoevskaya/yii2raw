@@ -1,0 +1,16 @@
+stages:
+  - build
+  - deploy
+
+build-job:
+  stage: build
+  before_script:
+    - docker login $CI_REGISTRY -u $REGISTRY_LOGIN --password-stdin <<<$REGISTRY_PASSWORD
+  script:
+    - docker build ./backend -t $CI_REGISTRY_IMAGE
+    - docker push $CI_REGISTRY_IMAGE
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Deploy Complete."
