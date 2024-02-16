@@ -1,8 +1,4 @@
-FROM php:8.0-alpine3.16
-
-WORKDIR /app
-
-COPY . /app
+FROM php:8.0-fpm-alpine3.15
 
 RUN if [[ -n ${http_proxy} ]]; then pear config-set http_proxy "$http_proxy"; fi
 
@@ -16,10 +12,14 @@ RUN apk add --no-cache libmcrypt-dev \
     && pecl install mcrypt-1.0.4 && pecl clear-cache\
     && docker-php-ext-enable mcrypt
 
-COPY --from=composer:2.7 /usr/bin/composer /usr/local/bin/composer
-# --no-interaction --no-plugins --no-scripts --no-dev --prefer-dist
-RUN composer install 
-
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
-CMD ["-S", "0.0.0.0:8080", "-t", "/app/public"]
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+USER www-data:www-data
+
+WORKDIR /var/www/backend
+
+COPY --chown=www-data:www-data . .
+
+RUN composer install --no-dev
