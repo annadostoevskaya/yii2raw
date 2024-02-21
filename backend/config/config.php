@@ -8,7 +8,7 @@ return [
     'basePath' => dirname(__DIR__),
     'components' => [
         'errorHandler' => [
-            'errorAction' => 'api/error'
+            'errorAction' => 'sys/error'
         ],
         'db' => $db,
         'request' => [

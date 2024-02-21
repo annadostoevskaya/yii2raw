@@ -8,7 +8,7 @@ use yii\web\Controller;
 
 use app\tasks\DownloadTask;
 
-class ApiController extends Controller
+class SysController extends Controller
 {
     function actionError()
     {
@@ -45,6 +45,13 @@ class ApiController extends Controller
         return $this->asJson([
             'id' => $taskId,
             'success' => true
+        ]);
+    }
+
+    function actionTest()
+    {
+        return $this->asJson([
+            "request_uri" => $_SERVER['REQUEST_URI']
         ]);
     }
 }
