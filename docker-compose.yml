@@ -8,6 +8,8 @@ networks:
 
 services:
   nginx:
+    environment:
+      - TZ=Asia/Almaty
     image: nginx:1.25-alpine3.18-perl
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
