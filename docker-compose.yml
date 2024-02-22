@@ -18,7 +18,7 @@ services:
     networks:
       - backend
     ports:
-      - 80:80
+      - 3000:80
       # - 443:443
     depends_on:
       # - frontend
@@ -48,8 +48,6 @@ services:
     image: mysql:8.0
     networks:
       - backend
-    ports:
-      - 3306:3306
     restart: always
     volumes:
       - ./docker/mysql:/var/lib/mysql:cached
@@ -58,8 +56,6 @@ services:
     image: redis:7.2.4-alpine3.19
     networks:
       - backend
-    ports:
-      - 6379:6379
     volumes:
       - ./docker/redis:/data:cached
     restart: always

@@ -8,4 +8,5 @@ References:
 - Webpack: https://adityash1.hashnode.dev/webpack-under-the-hood
 - PHP + Docker: https://habr.com/ru/articles/460173/
 - Yii2 + Docker: https://youtu.be/gVGfegSLg14
+- Nginx Configuration: https://www.yiiframework.com/doc/guide/2.0/en/start-installation
 
