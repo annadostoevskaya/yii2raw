@@ -1,6 +1,6 @@
 FROM alpine:3.16
 
-WORKDIR /app
+WORKDIR /var/www/frontend
 
 RUN apk add --no-cache npm
 
