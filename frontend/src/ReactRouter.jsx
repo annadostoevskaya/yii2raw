@@ -10,10 +10,8 @@
 (((global, factory) => {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.ReactRouter = {}));
-})(this, ((exports) => { 'use strict';
-
-  const { useEffect, useState } = React;
+  (global = global || self, factory(global.ReactRouter = {}, global.React));
+})(this, ((exports, React) => { 'use strict';
 
   const extractPath = (route) => {
     return route.split('?').at(0);
@@ -24,12 +22,12 @@
     return new URLSearchParams(params);
   }
 
-  exports.Router = ({routes, _404}) => {
-    const [route, setRoute] = useState(window.location.hash);
+  exports.Router = ({ routes, _404 }) => {
+    const [route, setRoute] = React.useState(window.location.hash);
 
     const handleRoute = () => setRoute(window.location.hash);
 
-    useEffect(() => {
+    React.useEffect(() => {
       window.addEventListener("hashchange", handleRoute);
       return () => window.removeEventListener("hashchange", handleRoute);
     }, []);

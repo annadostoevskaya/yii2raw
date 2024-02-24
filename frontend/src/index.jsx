@@ -6,20 +6,13 @@
  * Description: <empty>
  */
 
-const { useRef, useState } = React;
+const { useEffect, useRef, useState } = React;
 const { Router } = ReactRouter;
-
-function Reference({title, href})
-{
-  return <a href={ href }>{ title }|</a>;
-}
 
 function NavBar({routes})
 {
-  let references = routes.map((r, key) => <Reference key={ key } title={ r.title } href={ r.path } />);
-  return (<div className="nav-bar">
-    {references}
-  </div>);
+  let references = routes.map((r, key) => <a key={ key } href={ r.path }>{ r.title }|</a>);
+  return (<nav>{references}</nav>);
 }
 
 function Home()
@@ -34,7 +27,7 @@ function Contact()
 
 function About()
 {
-  return <p>About Page</p>
+  return <p>About Page</p>;
 }
 
 function _404()
@@ -44,41 +37,74 @@ function _404()
 
 function Competition({id})
 {
-  return <p>Competition #{id}</p>
+  return <p>Competition #{id}</p>;
 }
 
-function Root()
+function Locale({ currentLocale, locales, onChange })
 {
-  routes = [
+  let options = locales.map((locale, key) => <option key={ key } value={ locale.code }>{ locale.title }</option>);
+  return (<select name="locales" value={ currentLocale } onChange={ onChange }>{ options }</select>);
+}
+
+function Loading()
+{
+  const renderCounter  = useRef(0);
+  renderCounter.current = renderCounter.current + 1;
+
+  [isLoaded, setIsLoaded] = useState(false);
+  [locale, setLocale] = useState(i18n.getlocale());
+
+  if (!isLoaded)
+  {
+    i18n.init(locale, () => { setIsLoaded(true); });
+    return <p>Loading...</p>;
+  }
+
+  var routes = [
     {
-      title: 'Home',
-      path: '#/',
+      title: i18n._('nav.home'),
+      path: '',
       content: () => { return <Home /> },
     },
 
     {
-      title: 'Contact',
+      title: i18n._('nav.contact'),
       path: '#/contact',
       content: () => { return <Contact /> },
     },
 
     {
-      title: 'About',
+      title: i18n._('nav.about'),
       path: '#/about',
       content: () => { return <About /> },
     },
 
     {
-      title: 'Competition',
+      title: i18n._('nav.competition'),
       path: '#/competition',
       content: (urlSearchParams) => { return <Competition id={ urlSearchParams.get('id') } /> }
     },
   ];
 
-  return <>
+  var locales = [
+    { title: i18n._('settings.eng'), code: 'en' },
+    { title: i18n._('settings.rus'), code: 'ru' }
+  ];
+
+  const changeLocale = (e) => {
+    i18n.setlocale(e.target.value);
+    setIsLoaded(false);
+    setLocale(e.target.value);
+  }
+  
+  return (<>
+    <Locale currentLocale={ locale } locales={ locales } onChange={ changeLocale } />
     <NavBar routes={ routes } />
     <main>
-      <Router routes={ routes } _404={<_404 />} />
+      <Router routes={ routes } _404={ <_404 /> } />
     </main>
-  </>
+    <h1>Renders: {renderCounter.current}</h1>
+  </>);
 }
+
+function Root() { return <Loading />; }
