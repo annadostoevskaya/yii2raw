@@ -52,6 +52,8 @@ services:
     image: mysql:8.0
     networks:
       - backend
+    ports:
+      - 3306:3306 # TODO(annad): Remove this line!
     restart: always
     volumes:
       - ./docker/mysql:/var/lib/mysql:cached

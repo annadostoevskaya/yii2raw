@@ -8,6 +8,7 @@ $config = [
         'queue',
     ],
     'id' => 'template_project-console',
+    'controllerNamespace' => 'app\commands',
     'basePath' => dirname(__DIR__),
     'components' => [
         'db' => $db,

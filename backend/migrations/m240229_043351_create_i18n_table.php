@@ -14,7 +14,7 @@ class m240229_043351_create_i18n_table extends Migration
     {
         $this->createTable('{{%i18n}}', [
             'id' => $this->primaryKey(),
-            'key' => $this->string()->notNull(),
+            'uid' => $this->string()->notNull(),
             'code' => $this->string()->notNull(),
             'message' => $this->string()->notNull()
         ]);

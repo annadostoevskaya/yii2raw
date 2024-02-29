@@ -2,7 +2,7 @@
  * @author github.com/annadostoevskaya
  * @email iwantknow.aboutjt68h43@gmail.com
  * @create date 2024-02-25 20:21:22
- * @modify date 2024-02-25 20:21:47
+ * @modify date 2024-02-29 23:21:29
  * @desc [description]
  */
 (((global, factory) => {
@@ -14,7 +14,7 @@
     let messages_ = {};
   
     const init = (locale, cb = null) => {  
-      fetch(`/i18n/${locale}.json`, {
+      fetch(`/api/i18n/${locale}.json`, {
         method: 'GET',
         headers: {Accept: 'application/json'},
         mode: 'cors',
