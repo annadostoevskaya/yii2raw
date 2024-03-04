@@ -3,7 +3,6 @@
 namespace app\commands;
 
 use Yii;
-use app\models\I18N;
 
 class IntlController extends \yii\console\Controller
 {
@@ -43,5 +42,11 @@ class IntlController extends \yii\console\Controller
         }
 
         return 0;
+    }
+
+    public function actionScan()
+    {
+        // TODO(annad): $dir, $pattern, etc... grep '_\(\".*\"\)'
+        // grep -E -i -o 'i18n\._\(.*\)' * | sed -rn 's/.*i18n\._\([",\'](.*)[",\']\)/\1/p'
     }
 }
