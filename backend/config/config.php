@@ -12,6 +12,7 @@ return [
         ],
         'db' => $db,
         'request' => [
+            'baseUrl' => '/api',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
